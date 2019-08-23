@@ -13,9 +13,7 @@ import javax.persistence.OneToOne;
 @Entity
 public class OrderItem implements Serializable {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -25,7 +23,7 @@ public class OrderItem implements Serializable {
 	@OneToOne
 	private Product product;
 	
-	@ManyToOne
+	/*@ManyToOne
 	private OrderDetail orderDetail;
 
 	public OrderDetail getOrderDetail() {
@@ -35,7 +33,7 @@ public class OrderItem implements Serializable {
 	public void setOrderDetail(OrderDetail orderDetail) {
 		this.orderDetail = orderDetail;
 	}
-
+*/
 	private double buyingPrice;
 	private int productCount;
 	

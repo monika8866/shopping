@@ -2,34 +2,27 @@ package com.monika.DAOImpl;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.monika.DAO.CategoryDAO;
 import com.monika.Model.Category;
 
-@Repository("categoryDAO")
+
+
+@Repository
 @Transactional
 public class CategoryDAOImpl implements CategoryDAO {
-	
-    @Autowired
-    private SessionFactory sessionFactory;
-	public Category get(int id) {
-		try {
-			return sessionFactory.getCurrentSession().get(Category.class,id);
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
+
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public List<Category> list() {
-      String selectActiveCategory = "FROM Category WHERE active = :active";
+		
+		String selectActiveCategory = "FROM Category WHERE active = :active";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(selectActiveCategory);
 				
@@ -38,37 +31,57 @@ public class CategoryDAOImpl implements CategoryDAO {
 		return query.getResultList();
 	}
 
+	/*
+	 * Getting single category based on id
+	 */
+	public Category get(int id) {
+
+		return sessionFactory.getCurrentSession().get(Category.class, Integer.valueOf(id));
+
+	}
+
+	
+
 	public boolean add(Category category) {
+
 		try {
+			// add the category to the database table
 			sessionFactory.getCurrentSession().persist(category);
 			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return false;
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
+
+	}
+
+	/*
+	 * Updating a single category
+	 */
+	
+	public boolean update(Category category) {
+
+		try {
+			// add the category to the database table
+			sessionFactory.getCurrentSession().update(category);
+			return true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}
 
-	public boolean update(Category category) {
-		try {
-			sessionFactory.getCurrentSession().update(category);
-			return true;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-	}
 
 	public boolean delete(Category category) {
+		
 		category.setActive(false);
+		
 		try {
+			// add the category to the database table
 			sessionFactory.getCurrentSession().update(category);
 			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception ex) {
+			ex.printStackTrace();
 			return false;
 		}
 	}

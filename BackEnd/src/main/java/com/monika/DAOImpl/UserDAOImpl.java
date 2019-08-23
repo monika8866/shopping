@@ -1,5 +1,7 @@
 package com.monika.DAOImpl;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.hibernate.SessionFactory;
@@ -16,80 +18,101 @@ public class UserDAOImpl implements UserDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	public boolean save(User user) {
+
+	public User getByEmail(String email) {
+		String selectQuery = "FROM User WHERE email = :email";
 		try {
-			sessionFactory.getCurrentSession().save(user);	
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,User.class)
+						.setParameter("email",email)
+							.getSingleResult();
+		}
+		catch(Exception ex) {
+			return null;
+		}
+							
+	}
+
+	public boolean add(User user) {
+		try {			
+			sessionFactory.getCurrentSession().persist(user);			
 			return true;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch(Exception ex) {
 			return false;
 		}
 	}
 
-	public boolean update(User user) {
-		try {
-			sessionFactory.getCurrentSession().update(user);	
+
+	public boolean addAddress(Address address) {
+		try {			
+			// will look for this code later and why we need to change it
+			sessionFactory.getCurrentSession().persist(address);			
 			return true;
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch(Exception ex) {
 			return false;
 		}
+	}
+	
+	
+	public boolean updateAddress(Address address) {
+		try {			
+			sessionFactory.getCurrentSession().update(address);			
+			return true;
+		}
+		catch(Exception ex) {
+			return false;
+		}
+	}	
+	
+
+	
+	public List<Address> listShippingAddresses(int userId) {
+		String selectQuery = "FROM Address WHERE userId = :userId AND shipping = :isShipping ORDER BY id DESC";
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,Address.class)
+						.setParameter("userId", userId)
+						.setParameter("isShipping", true)
+							.getResultList();
 		
 	}
 
-	public boolean delete(int id) {
-		try {
-			sessionFactory.getCurrentSession().delete(get(id));	
-			return true;
+
+	public Address getBillingAddress(int userId) {
+		String selectQuery = "FROM Address WHERE userId = :userId AND billing = :isBilling";
+		try{
+		return sessionFactory
+				.getCurrentSession()
+					.createQuery(selectQuery,Address.class)
+						.setParameter("userId", userId)
+						.setParameter("isBilling", true)
+						.getSingleResult();
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return false;
+		catch(Exception ex) {
+			return null;
 		}
 	}
 
 	public User get(int id) {
-		try {
-			return sessionFactory.getCurrentSession().get(User.class,id);	
+		try {			
+			return sessionFactory.getCurrentSession().get(User.class, id);			
 		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
 			return null;
 		}
 	}
 
-	public boolean save(Address address) {
-		try {
-			sessionFactory.getCurrentSession().save(address);	
-			return true;
+	public Address getAddress(int addressId) {
+		try {			
+			return sessionFactory.getCurrentSession().get(Address.class, addressId);			
 		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public boolean update(Address address) {
-		try {
-			sessionFactory.getCurrentSession().update(address);	
-			return true;
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public Address getBillingAddress(int id) {
-		try {
-			return sessionFactory.getCurrentSession().get(Address.class,id);	
-		}
-		catch(Exception e) {
-			e.printStackTrace();
+		catch(Exception ex) {
+			System.out.println(ex.getMessage());
 			return null;
 		}
 	}
-
 }

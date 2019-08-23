@@ -16,18 +16,22 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
+            <a class="nav-link" href="${contextRoot}/index.jsp">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="${contextRoot}/about.jsp">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
+            <a class="nav-link" href="${contextRoot}/contact.jsp">Contact</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link" href="${contextRoot}/show/all/viewProduct.jsp">View Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${contextRoot}/manage/product.jsp">Manage Product</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="${contextRoot}/register.jsp">Register</a>
           </li>
         </ul>
       </div>

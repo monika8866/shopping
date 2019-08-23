@@ -2,6 +2,7 @@ package com.monika.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class Category implements Serializable {
 	private String name;
 	
 	private String description;
-
+	
+	@Column(name = "is_active")
 	private boolean active = true;
 	
 	
@@ -49,5 +51,13 @@ public class Category implements Serializable {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", active=" + active + "]";
+	}
+
 	
 }

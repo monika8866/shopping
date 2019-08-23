@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.monika.Model.Cart;
 import com.monika.Model.CartLine;
-import com.monika.Model.OrderDetail;
+//import com.monika.Model.OrderDetail;
 
 
 
@@ -26,7 +26,7 @@ public interface CartLineDAO {
 	public List<CartLine> listAvailable(int cartId);
 	
 	// adding order details
-	boolean addOrderDetail(OrderDetail orderDetail);
+	//boolean addOrderDetail(OrderDetail orderDetail);
 
 	
 }

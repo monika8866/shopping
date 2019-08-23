@@ -1,4 +1,4 @@
-package com.monika.DAOImpl;
+/*package com.monika.DAOImpl;
 
 import java.util.List;
 
@@ -108,7 +108,7 @@ public class CartLineDAOImpl implements CartLineDAO {
 	}
 
 
-	public boolean addOrderDetail(OrderDetail orderDetail) {
+	//public boolean addOrderDetail(OrderDetail orderDetail) {
 		try {			
 			sessionFactory.getCurrentSession().persist(orderDetail);			
 			return true;
@@ -118,4 +118,4 @@ public class CartLineDAOImpl implements CartLineDAO {
 		}
 	}
 		
-}
+}*/

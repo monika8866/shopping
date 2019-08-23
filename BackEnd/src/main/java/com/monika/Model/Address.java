@@ -25,6 +25,8 @@ public class Address implements Serializable {
 	private String postalCode;
 	private boolean shipping;
     private boolean billing;
+	private int userId;
+    
 	public int getId() {
 		return id;
 	}
@@ -78,6 +80,12 @@ public class Address implements Serializable {
 	}
 	public void setBilling(boolean billing) {
 		this.billing = billing;
+	}
+	public void setUserId(int userId) {
+		this.userId=userId;
+	}
+	public int getUserId() {
+		return this.userId;
 	}
 	
 	

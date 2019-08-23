@@ -21,9 +21,7 @@ import org.hibernate.criterion.Order;
 @Entity
 public class OrderDetail implements Serializable {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,8 +35,8 @@ public class OrderDetail implements Serializable {
 	private Address shipping;
 	@ManyToOne
 	private Address billing;
-	@OneToMany(mappedBy="orderDetail", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private List<Order> orderItems = new ArrayList<Order>();
+	/*@OneToMany(mappedBy="orderDetail", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Order> orderItems = new ArrayList<Order>();*/
 	private int orderCount;
 	private Date orderDate;
 	
@@ -84,11 +82,11 @@ public class OrderDetail implements Serializable {
 	public void setBilling(Address billing) {
 		this.billing = billing;
 	}
-	public List<Order> getOrderItems() {
+	/*public List<Order> getOrderItems() {
 		return orderItems;
 	}
 	public void setOrderItems(List<Order> orderItems) {
 		this.orderItems = orderItems;
-	}
+	}*/
 }
 	
